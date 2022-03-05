@@ -10,10 +10,40 @@ export class Product {
 		this.id = id;
 	}
 
-	static async getAll():Promise<product[]> {
+	static async getAll(): Promise<Product[] | undefined> {
 		try {
-            const { rows } = await client.query('SELECT * FROM product');
-            return rows.m
-		} catch (e) {}
+			const { rows } = await client.query('SELECT * FROM product');
+			return rows.map((row) => new Product(row.name, row.price, row.id));
+		} catch (e) {
+			console.log('Error fetching all products', e);
+			return undefined;
+		}
+	}
+
+	static async getById(id: number) {
+		const query = {
+			text: 'SELECT * FROM product WHERE id = $1',
+			values: [id],
+		};
+		try {
+			const { rows } = await client.query(query);
+			if (!rows.length) return null;
+			return new Product(rows[0].name, rows[0].price, rows[0].id);
+		} catch (e) {
+			console.log(`Error fetching product with id: ${id}`, e);
+		}
+	}
+
+	async create() {
+		const query = {
+			text: 'INSERT INTO product(name, price) VALUES($1, $2) RETURNING id',
+			values: [this.name, this.price],
+		};
+		try {
+			const { rows } = await client.query(query);
+			this.id = rows[0].id;
+		} catch (e) {
+			console.log('Error creating new product', e);
+		}
 	}
 }
