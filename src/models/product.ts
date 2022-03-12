@@ -9,7 +9,9 @@ export class Product {
 		this.price = price;
 		this.id = id;
 	}
-
+	getObject() {
+		return { id: this.id, name: this.name, price: this.price };
+	}
 	static async getAll(): Promise<Product[] | undefined> {
 		try {
 			const { rows } = await client.query('SELECT * FROM product');

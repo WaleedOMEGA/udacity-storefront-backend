@@ -1,8 +1,8 @@
 import { Router } from "express";
 import User from "../models/user";
 import bcrypt from 'bcrypt';
-import { token } from "../util";
 import { expire } from './../config';
+import { Token } from "../token";
 const login = Router();
 login.post('/login/', async (req, res) => {
     
@@ -13,7 +13,7 @@ login.post('/login/', async (req, res) => {
 	const isValid = await bcrypt.compare(password, user.password);
 	if (!isValid) return res.status(401).send('Password mismatch');
 	res.send(
-		token.generate(id, expire),
+		Token.generate(id, expire),
     );
 });
 export default login;

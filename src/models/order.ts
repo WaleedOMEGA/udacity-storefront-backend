@@ -18,18 +18,26 @@ export class Order {
 		this.id = id;
 	}
 
-	
-     static async getByUserId(user_id: string) {
-    const query = {
-      text:
-        "select * from order o inner join product p on o.product_id=p.id where o.user_id=$1",
-      values: [user_id],
-    };
-    try {
-      const { rows } = await client.query(query);
-      return rows.map((row) => new Order(row.status, row.products, row.user_id, row.id));
-    } catch (e) {
-      console.log(`Error fetching orders with user_id: ${user_id}`, e);
-    }
-  }
+	getObject() {
+		return {
+			id: this.id,
+			status: this.status,
+			products: this.products,
+			user_id: this.user_id,
+		};
+	}
+	static async getByUserId(user_id: string) {
+		const query = {
+			text: 'select * from order o inner join product p on o.product_id=p.id where o.user_id=$1',
+			values: [user_id],
+		};
+		try {
+			const { rows } = await client.query(query);
+			return rows.map(
+				(row) => new Order(row.status, row.products, row.user_id, row.id),
+			);
+		} catch (e) {
+			console.log(`Error fetching orders with user_id: ${user_id}`, e);
+		}
+	}
 }

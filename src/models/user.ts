@@ -17,17 +17,18 @@ export class User {
 		this.lastname = lastname;
 		this.password = password;
 	}
-	static async getAll():Promise<User[] | undefined> {
+	getObject() {
+		return {
+			id: this.id,
+			firstname: this.firstname,
+			lastname: this.lastname,
+		};
+	}
+	static async getAll(): Promise<User[] | undefined> {
 		try {
 			const { rows } = await client.query('SELECT * FROM user');
 			return rows.map(
-				(row) =>
-					new User(
-						row.id,
-						row.firstname,
-						row.lastname,
-						row.password,
-					),
+				(row) => new User(row.id, row.firstname, row.lastname, row.password),
 			);
 		} catch (e) {
 			console.log('Error fetching all users', e);
@@ -54,12 +55,7 @@ export class User {
 		this.password = await bcrypt.hash(this.password, OMEGA);
 		const query = {
 			text: 'INSERT INTO users(id, firstname, lastname, password) VALUES($1, $2, $3, $4)',
-			values: [
-				this.id,
-				this.firstname,
-				this.lastname,
-				this.password,
-			],
+			values: [this.id, this.firstname, this.lastname, this.password],
 		};
 		try {
 			await client.query(query);
