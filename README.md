@@ -15,6 +15,19 @@ Your application must make use of the following libraries:
 
 ## Steps to Completion
 
+### Setup environment
+
+First, create a `.env` file with all the required environment variables:
+
+
+POSTGRES_HOST = '127.0.0.1';
+POSTGRES_DB = 'store';
+POSTGRES_USER = 'postgres';
+POSTGRES_PASSWORD = 'admin';
+OMEGA='waleed';
+SECRET='omega';
+```
+
 ### 1. Plan to Meet Requirements
 
 In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
