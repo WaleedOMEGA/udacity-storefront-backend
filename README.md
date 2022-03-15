@@ -19,14 +19,15 @@ Your application must make use of the following libraries:
 
 First, create a `.env` file with all the required environment variables:
 
-
 POSTGRES_HOST = '127.0.0.1';
 POSTGRES_DB = 'store';
+POSTGRES_DB_TEST='testStore';
 POSTGRES_USER = 'postgres';
-DATABASE_URL="postgresql://postgres:admin@localhost:5432/store"
+DATABASE_URL="postgresql://postgres:admin@localhost:5432/store";
 POSTGRES_PASSWORD = 'admin';
 OMEGA='waleed';
 SECRET='omega';
+ENV='dev';
 server port=3000;
 database port=5432
 

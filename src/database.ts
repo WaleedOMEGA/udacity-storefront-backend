@@ -5,17 +5,33 @@ dotenv.config();
 
 const {
 POSTGRES_HOST,
-POSTGRES_DB,
+    POSTGRES_DB,
+POSTGRES_DB_TEST,
 POSTGRES_USER,
     POSTGRES_PASSWORD,
-OMEGA
+    OMEGA,
+SECRET,
+ENV
 }=process.env
 
-const client = new Pool({
-    host: POSTGRES_HOST,
-    database: POSTGRES_DB,
-    user: POSTGRES_USER,
-    password:POSTGRES_PASSWORD
-});
+let client;
+if (ENV === 'test') {
+	 client = new Pool({
+		host: POSTGRES_HOST,
+		database: POSTGRES_DB_TEST,
+		user: POSTGRES_USER,
+		password: POSTGRES_PASSWORD,
+	});
+}
+
+if (ENV === 'dev') {
+	 client = new Pool({
+		host: POSTGRES_HOST,
+		database: POSTGRES_DB,
+		user: POSTGRES_USER,
+		password: POSTGRES_PASSWORD,
+	});
+}
+
 
 export default client;
