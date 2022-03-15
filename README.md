@@ -23,10 +23,36 @@ First, create a `.env` file with all the required environment variables:
 POSTGRES_HOST = '127.0.0.1';
 POSTGRES_DB = 'store';
 POSTGRES_USER = 'postgres';
+DATABASE_URL="postgresql://postgres:admin@localhost:5432/store"
 POSTGRES_PASSWORD = 'admin';
 OMEGA='waleed';
 SECRET='omega';
-```
+server port=3000;
+database port=5432
+
+
+
+## Built With
+
+* [NodeJS](https://nodejs.org/) - The JavaScript runtime
+* [db-migrate](https://db-migrate.readthedocs.io/en/latest/) - The database migration tool
+* [Express](https://expressjs.com) - The web framework
+* [TypeScript](https://www.typescriptlang.org/) - Types JS extension
+* [Jasmine](https://jasmine.github.io/) - The unit testing framework
+## Database creation
+CREATE DATABASE store;
+
+CREATE TABLE product(id SERIAL PRIMARY KEY,name VARCHAR(50),price integer);
+
+CREATE TABLE users(id SERIAL PRIMARY KEY,first_name VARCHAR(50),last_name VARCHAR(50),password VARCHAR(100));
+
+create TABLE orders (
+id SERIAL PRIMARY KEY,
+user_id bigint not null References users(id),
+product_id bigint not null References product(id),
+quantity integer,
+status VARCHAR(50)
+);
 
 ### 1. Plan to Meet Requirements
 

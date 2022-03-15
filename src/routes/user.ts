@@ -24,8 +24,8 @@ user.get(
 
 user.post(
 	'/',
-	auth.requiresAuth(async (req, res, auth) => {
-		if (!auth) return res.status(401).send();
+	async (req, res, auth) => {
+	
 		const { id, firstname, lastname, password, superuser } = req.body;
 		if (!id || !firstname || !lastname || !password)
 			return res.status(400).send();
