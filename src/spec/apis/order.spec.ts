@@ -1,6 +1,7 @@
 import supertest from "supertest";
+import app from "../../server";
 
-import app from "../../src/server";
+
 import { getAuth } from "../helpers/getAuth";
 
 

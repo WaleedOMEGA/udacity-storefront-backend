@@ -1,4 +1,5 @@
-import User from "../../src/models/user";
+import User from "../../models/user";
+
 
 
 describe("User DB model tests", () => {

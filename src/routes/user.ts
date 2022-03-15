@@ -32,7 +32,7 @@ user.post(
 		const user = new User(id, firstname, lastname, password);
 		await user.create();
 		res.send(user.getObject());
-	}),
+	}
 );
 
 

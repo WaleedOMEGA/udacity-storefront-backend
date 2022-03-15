@@ -1,6 +1,6 @@
 import supertest from "supertest";
-import app from "../../src/server";
-import { Token } from "../../src/token";
+import app from "../../server";
+import { Token } from "../../token";
 
 
 

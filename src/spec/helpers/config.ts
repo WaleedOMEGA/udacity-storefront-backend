@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-import { connect } from "../../src/server";
+import { connect } from "../../server";
+
 dotenv.config();
 
 

@@ -14,24 +14,32 @@ SECRET,
 ENV
 }=process.env
 
-let client;
+let env;
+const dev = {
+	host: POSTGRES_HOST,
+	database: POSTGRES_DB,
+	user: POSTGRES_USER,
+	password: POSTGRES_PASSWORD,
+};
+const test = {
+	host: POSTGRES_HOST,
+	database: POSTGRES_DB_TEST,
+	user: POSTGRES_USER,
+	password: POSTGRES_PASSWORD,
+};
 if (ENV === 'test') {
-	 client = new Pool({
-		host: POSTGRES_HOST,
-		database: POSTGRES_DB_TEST,
-		user: POSTGRES_USER,
-		password: POSTGRES_PASSWORD,
-	});
+	env = test;
+} else {
+	env===dev
 }
 
-if (ENV === 'dev') {
-	 client = new Pool({
-		host: POSTGRES_HOST,
-		database: POSTGRES_DB,
-		user: POSTGRES_USER,
-		password: POSTGRES_PASSWORD,
-	});
-}
+
+
+
+	const client = new Pool(env);
+
+
+
 
 
 export default client;

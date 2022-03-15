@@ -1,3 +1,4 @@
+
 import client from "../database";
 import { product } from "../interfaces/product";
 
@@ -33,7 +34,7 @@ export class Order {
 				'select * from orders o inner join product p on o.product_id=p.id',
 			);
 			return rows.map(
-				(row) => new Order(row.status, row.products, row.user_id, row.id),
+				(row: { status: string; products: { product_id: number; quantity: number; }[]; user_id: string; id: number | undefined; }) => new Order(row.status, row.products, row.user_id, row.id),
 			);
 		} catch (e) {
 			console.log('Error fetching all orders', e);

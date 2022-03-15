@@ -1,5 +1,6 @@
 import supertest from "supertest";
-import app from "../../src/server";
+import app from "../../server";
+
 
 
 

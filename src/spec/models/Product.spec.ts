@@ -1,4 +1,5 @@
-import { Product } from "../../src/models/product";
+import { Product } from "../../models/product";
+
 
 
 describe("Product DB model tests", () => {

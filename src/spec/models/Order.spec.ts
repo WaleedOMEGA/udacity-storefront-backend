@@ -1,4 +1,5 @@
-import { Order } from "../../src/models/order";
+import { Order } from "../../models/order";
+
 
 
 describe("Order DB model tests", () => {
