@@ -64,7 +64,7 @@ Response Body: { id: string, firstname: string, lastname: string }
 ```
 
 - Create N[token required] 'users' [POST]
-- POST "/user/" (Required Authorization Header SuperUser)
+- POST "/user/" 
 Create a new user by sending its id, firstname, lastname, password .
 
 ```
@@ -94,10 +94,15 @@ CREATE TABLE users(id SERIAL PRIMARY KEY,first_name VARCHAR(50),last_name VARCHA
 create TABLE orders (
 id SERIAL PRIMARY KEY,
 user_id bigint not null References users(id),
-product_id bigint not null References product(id),
-quantity integer,
 status VARCHAR(50)
 );
+CREATE TABLE order_products(
+  id SERIAL PRIMARY KEY,
+  order_id bigint not null REFERENCES orders(id),
+  product_id bigint not null REFERENCES product(id),
+  quantity integer
+);
+
 
 #### Product
 -  id
@@ -115,10 +120,15 @@ status VARCHAR(50)
 
 #### Orders
 - id
-- id of each product in the order
-- quantity of each product in the order
 - user_id
 - status of order (active or complete)
 <!-- 
-TABLE orders (id SERIAL PRIMARY KEY,user_id bigint not null References users(id),product_id bigint not null References product(id),
-quantity integer,status VARCHAR(50)); -->
+TABLE orders (id SERIAL PRIMARY KEY,user_id bigint not null References users(id),status VARCHAR(50)); -->
+
+### order_products
+<!-- TABLE order_products(
+  id SERIAL PRIMARY KEY,
+  order_id bigint not null REFERENCES orders(id),
+  product_id bigint not null REFERENCES product(id),
+  quantity integer
+); -->
