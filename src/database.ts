@@ -30,7 +30,7 @@ const test = {
 if (ENV === 'test') {
 	env = test;
 } else {
-	env===dev
+	env  = dev
 }
 
 
