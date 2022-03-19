@@ -9,7 +9,7 @@
 		"tsc": "tsc",
 		"start": "tsc && node dist/server.js",
 		"migrations": "db-migrate",
-		"testDb": "ENV=test db-migrate --env test up && jasmine-ts && db-migrate db:drop test"
+		"testDb": "db-migrate --env test up && jasmine-ts && db-migrate db:drop test"
 	},
 	"author": "Udacity",
 	"license": "ISC",
